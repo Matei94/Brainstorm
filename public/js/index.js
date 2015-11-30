@@ -1,19 +1,25 @@
 /*** DOCUMENT READY **********************************************************/
 
 $(document).ready(function() {
+  $(".header").click(function () {
+    $header = $(this);
+    //getting the next element
+    $content = $header.next();
+    //open up the content needed - toggle the slide- if visible, slide up, if not slidedown.
+    $content.slideToggle(500);
+  });
+
   $.get("/session", function(data) {
     var messagesRef = new Firebase('https://matei.firebaseio.com/' + data);
 
     // REGISTER DOM ELEMENTS
     var messageField = $('#messageInput');
-    var nameField = $('#nameInput');
     var messageList = $('#example-messages');
 
     // LISTEN FOR KEYPRESS EVENT
     messageField.keypress(function (e) {
       if (e.keyCode == 13) {
         //FIELD VALUES
-        var username = nameField.val();
         var message = messageField.val();
 
         //SAVE DATA TO FIREBASE AND EMPTY FIELD
@@ -42,6 +48,12 @@ $(document).ready(function() {
       messageList[0].scrollTop = messageList[0].scrollHeight;
     });
   });
+
+  /* Get username */
+  var username;
+  do {
+    username = prompt("Enter your name here (at least 4 characters)");
+  } while (username == null || username.length < 4);
 });
 
 /*****************************************************************************/
