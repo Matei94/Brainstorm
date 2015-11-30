@@ -17,7 +17,6 @@ body {
     margin-left: auto;
     margin-right: auto;
     margin-top: 5%;
-    margin-bottom: 10%;
 }
 
 #abousUs {
@@ -41,3 +40,60 @@ body {
     width: 40%;
     height: 30%;
 }
+
+#startNew {
+
+    font-size: 2.5em;
+    color: #000;
+    background-color: #ffff00;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 3%;
+    height: 8%;
+    width: 20%;
+    border: 0.2vw solid #000;
+}
+
+#bottomLeft {
+
+    width: 50%;
+    height: 30%;
+    vertical-align: center;
+    text-align: center;
+    margin-left:auto;
+    margin-right:auto;
+    float: left;
+}
+
+#bottomRight {
+
+    width: 50%;
+    height: 30%;
+    vertical-align: center;
+    text-align: center;
+    margin-left:auto;
+    margin-right:auto;
+    float: left;
+}
+
+#joinText {
+
+    font-size: 1.5em;
+    color: #000;
+}
+
+#linkSession {
+
+    font-size: 30px;
+    border: 0.2vw solid #000;
+}
+
+#GoButton {
+
+    width: 20%;
+    height: 30%;
+    font-size: 30px;
+    background-color: #cc0000;
+    border: 0.2vw solid #000;
+}
+
