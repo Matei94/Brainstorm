@@ -1,15 +1,32 @@
 <html>
 	<head>
-		  <link rel="stylesheet" type="text/css" href="./public/css/brainPage.css">
+	
+        <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
+        <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js'></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.2.0/codemirror.js"></script>
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.2.0/codemirror.css"/>
+
+        <link rel="stylesheet" type="text/css" href="./public/css/firepad.css"/>
+        <link rel="stylesheet" type="text/css" href="./public/css/index.css">
+        <link rel="stylesheet" type="text/css" href="./public/css/brainPage.css">
+
+        <script src="https://cdn.firebase.com/libs/firepad/1.2.0/firepad.min.js"></script>
+		
 	</head>
 	<body id="background">
+	
 		<div id="tabs">
 			<button id="tab1"><b>Text Editor</b></button>
 			<button id="tab2"><b>Whiteboard</b></button>
 			<button id="tab3"><b>Code Editor</b></button>
 		</div>
-		<div id="online"></div>
+		<div id="online"><b>ONLINE</b></div>
 		<div id="feature"></div>
 		<div id="shareLink"></div>
+		
+		
+        <!-- Controller -->
+        <script src='./public/js/index.js'></script>
 	</body>
 </html>
