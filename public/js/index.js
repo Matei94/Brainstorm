@@ -1,12 +1,6 @@
 /*** DOCUMENT READY **********************************************************/
 
 $(document).ready(function() {
-  /* Get username */
-  var username;
-  do {
-    username = prompt("Enter your name here (at least 4 characters)");
-  } while (username == null || username.length < 4);
-
   $.get("/session", function(data) {
     var messagesRef = new Firebase('https://matei.firebaseio.com/' + data);
 
@@ -46,6 +40,12 @@ $(document).ready(function() {
       messageList[0].scrollTop = messageList[0].scrollHeight;
     });
   });
+
+  /* Get username */
+  var username;
+  do {
+    username = prompt("Enter your name here (at least 4 characters)");
+  } while (username == null || username.length < 4);
 });
 
 /*****************************************************************************/
