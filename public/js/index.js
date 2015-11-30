@@ -24,8 +24,10 @@ $(document).ready(function() {
 /*** FUNCTIONS ***************************************************************/
 
 function addOnlineUser(username) {
-  $('<div>').text(username).prepend($('<em/>').text('')).appendTo($('#online'));
-  $('#online')[0].scrollTop = $('#online')[0].scrollHeight;
+  // $('<div>').text(username).prepend($('<em/>').text('')).appendTo($('#online'));
+  // $('#online')[0].scrollTop = $('#online')[0].scrollHeight;
+
+  $("#users").append('<li id="' + username + '">' + username + '</li>');
 }
 
 
@@ -73,7 +75,7 @@ function setOnlineUsers(sessionId) {
     var data = snapshot.val();
     var username = data.username || "anonymous";
 
-    alert(username + " disconnected")
+    $('#' + username).remove();
   });
 
   var userRef = onlineUsersRef.push({username: username});
