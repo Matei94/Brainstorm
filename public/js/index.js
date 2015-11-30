@@ -1,7 +1,6 @@
 /*** VARIABLES ***************************************************************/
 
 var username;
-var textEditorHash;
 
 var textEditorReady = false;
 
@@ -12,55 +11,16 @@ var textEditorReady = false;
 /*** DOCUMENT READY **********************************************************/
 
 $(document).ready(function() {
-  console.log(window.location.href);
-  collapseChat();
+  var sessionId = window.location.pathname.substring(1);
+  if (sessionId.length > 0) {
+    onSessionId(sessionId);
+  } else {
+    $.get("/session", onSessionId);
+  }
+
   showTextEditor();
-
-  $.get("/session", function(data) {
-    var messagesRef = new Firebase('https://matei.firebaseio.com/' + data);
-
-    // REGISTER DOM ELEMENTS
-    var messageField = $('#messageInput');
-    var messageList = $('#example-messages');
-
-    // LISTEN FOR KEYPRESS EVENT
-    messageField.keypress(function (e) {
-      if (e.keyCode == 13) {
-        //FIELD VALUES
-        var message = messageField.val();
-
-        //SAVE DATA TO FIREBASE AND EMPTY FIELD
-        messagesRef.push({name:username, text:message});
-        messageField.val('');
-      }
-    });
-
-    // Add a callback that is triggered for each chat message.
-    messagesRef.limitToLast(10).on('child_added', function (snapshot) {
-      //GET DATA
-      var data = snapshot.val();
-      var username = data.name || "anonymous";
-      var message = data.text;
-
-      //CREATE ELEMENTS MESSAGE & SANITIZE TEXT
-      var messageElement = $("<li>");
-      var nameElement = $("<strong class='example-chat-username'></strong>")
-      nameElement.text(username);
-      messageElement.text(message).prepend(nameElement);
-
-      //ADD MESSAGE
-      messageList.append(messageElement)
-
-      //SCROLL TO BOTTOM OF MESSAGE LIST
-      messageList[0].scrollTop = messageList[0].scrollHeight;
-    });
-  });
-
-  /* Get username */
-  var username;
-  do {
-    username = prompt("Enter your name here (at least 4 characters)");
-  } while (username == null || username.length < 4);
+  collapseChat();
+  setUsername();
 });
 
 /*****************************************************************************/
@@ -69,16 +29,10 @@ $(document).ready(function() {
 
 /*** FUNCTIONS ***************************************************************/
 
-function getExampleRef() {
-  var ref = new Firebase('https://firepad.firebaseio-demo.com');
-  var hash = window.location.hash.replace(/#/g, '');
-  if (hash) {
-      ref = ref.child(hash);
-  } else {
-      ref = ref.push(); // generate unique location.
-      window.location = window.location + '#' + ref.key();
-  }
-  return ref;
+function setUsername() {
+  do {
+    username = prompt("Enter your name here (at least 4 characters)");
+  } while (username == null || username.length < 4);
 }
 
 
@@ -87,6 +41,56 @@ function collapseChat() {
     $(".chat-content").slideToggle(500);
   });
 }
+
+
+function onSessionId(sessionId) {
+  console.log("sessionId = " + sessionId);
+
+  setTextEditor(sessionId);
+  setChat(sessionId);
+}
+
+
+function setChat(sessionId) {
+  var messagesRef = new Firebase('https://matei.firebaseio.com/' + sessionId + "/chat");
+
+  // REGISTER DOM ELEMENTS
+  var messageField = $('#messageInput');
+  var messageList = $('#example-messages');
+
+  // LISTEN FOR KEYPRESS EVENT
+  messageField.keypress(function (e) {
+    if (e.keyCode == 13) {
+      //FIELD VALUES
+      var message = messageField.val();
+
+      //SAVE DATA TO FIREBASE AND EMPTY FIELD
+      messagesRef.push({name:username, text:message});
+      messageField.val('');
+    }
+  });
+
+  // Add a callback that is triggered for each chat message.
+  messagesRef.limitToLast(10).on('child_added', function (snapshot) {
+    //GET DATA
+    var data = snapshot.val();
+    var username = data.name || "anonymous";
+    var message = data.text;
+
+    //CREATE ELEMENTS MESSAGE & SANITIZE TEXT
+    var messageElement = $("<li>");
+    var nameElement = $("<strong class='example-chat-username'></strong>")
+    nameElement.text(username);
+    messageElement.text(message).prepend(nameElement);
+
+    //ADD MESSAGE
+    messageList.append(messageElement)
+
+    //SCROLL TO BOTTOM OF MESSAGE LIST
+    messageList[0].scrollTop = messageList[0].scrollHeight;
+  });
+}
+
 
 function showTextEditor () {
     $("#tab1").click(function() {
@@ -102,7 +106,6 @@ function showTextEditor () {
                 }
             });
         }
-        
     });
 }
 

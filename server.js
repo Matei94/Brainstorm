@@ -12,6 +12,7 @@ var randomstring = require("randomstring");
 
 var firebaseURL = "https://matei.firebaseio.com/";
 var firebaseRef = new Firebase(firebaseURL);
+var sessions = [];
 
 /*****************************************************************************/
 
@@ -29,12 +30,25 @@ app.get('/', function(req, res) {
   res.sendFile(__dirname + "/" + "brainPage.html" );
 });
 
-/* Session */
-app.get('/session', function(req, res) {
-  res.send(randomstring.generate({
-    length: 12,
-    charset: 'alphabetic'
-  }));
+app.get('/:id', function(req, res) {
+  /* Get new session */
+  if (req.params.id == "session") {
+    var sessionId = randomstring.generate({
+      length: 12,
+      charset: 'alphabetic'
+    });
+    sessions.push(sessionId);
+    res.send(sessionId);
+  }
+
+  /* Join session */
+  else {
+    if (sessions.indexOf(req.params.id) != -1) {
+      res.sendFile(__dirname + "/" + "index.html" );
+    } else {
+      res.send("404 Not found");
+    }
+  }
 });
 
 /* Database cleaning */
