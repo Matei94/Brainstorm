@@ -2,6 +2,7 @@
 
 var express = require('express');
 var Firebase = require("firebase");
+var randomstring = require("randomstring");
 
 /*****************************************************************************/
 
@@ -26,6 +27,14 @@ app.set('port', (process.env.PORT || 5000));
 /* Main page */
 app.get('/', function(req, res) {
   res.sendFile(__dirname + "/" + "index.html" );
+});
+
+/* Session */
+app.get('/session', function(req, res) {
+  res.send(randomstring.generate({
+    length: 12,
+    charset: 'alphabetic'
+  }));
 });
 
 /* Database cleaning */
