@@ -28,12 +28,12 @@ app.get('/', function(req, res) {
   res.sendFile(__dirname + "/" + "index.html" );
 });
 
-/* Clear database */
+/* Database cleaning */
 firebaseRef.remove(function(err) {
   if (err) {
-    console.log("error: " + err);
+    console.log("Database cleaning error: " + err);
   } else {
-    console.log("Success");
+    console.log("Database cleaning success");
   }
 });
 

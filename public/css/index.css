@@ -1,6 +1,8 @@
 .l-demo-container {
-  width: 500px;
-  margin: 40px auto 0px auto;
+  width: 20%;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
 }
 
 .example-chat {
