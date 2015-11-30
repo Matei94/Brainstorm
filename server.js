@@ -1,6 +1,16 @@
 /*** REQUIRES ****************************************************************/
 
 var express = require('express');
+var Firebase = require("firebase");
+
+/*****************************************************************************/
+
+
+
+/*** VARIABLES ***************************************************************/
+
+var firebaseURL = "https://matei.firebaseio.com/";
+var firebaseRef = new Firebase(firebaseURL);
 
 /*****************************************************************************/
 
@@ -16,6 +26,15 @@ app.set('port', (process.env.PORT || 5000));
 /* Main page */
 app.get('/', function(req, res) {
   res.sendFile(__dirname + "/" + "index.html" );
+});
+
+/* Clear database */
+firebaseRef.remove(function(err) {
+  if (err) {
+    console.log("error: " + err);
+  } else {
+    console.log("Success");
+  }
 });
 
 /* Start server */
