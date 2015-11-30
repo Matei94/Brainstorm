@@ -21,7 +21,7 @@ body {
 
 #abousUs {
 
-	font-size: 2.5em;
+	font-size: 2.5vw;
     color: #fff;
     background-color: #0000ff;
 	margin-right: 25%;
@@ -32,7 +32,7 @@ body {
 
 #aboutUsText {
 
-    font-size: 2em;
+    font-size: 2vw;
     color: #000;
     margin-right: auto;
     margin-left: auto;
@@ -79,13 +79,13 @@ body {
 
 #joinText {
 
-    font-size: 1.5em;
+    font-size: 1.5vw;
     color: #000;
 }
 
 #linkSession {
 
-    font-size: 30px;
+    font-size: 2vw;
     border: 0.2vw solid #000;
 }
 
@@ -93,7 +93,7 @@ body {
 
     width: 20%;
     height: 30%;
-    font-size: 30px;
+    font-size: 2vw;
     background-color: #cc0000;
     border: 0.2vw solid #000;
 }
