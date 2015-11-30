@@ -2,7 +2,7 @@
 
 $(document).ready(function() {
   var firepadRef = getExampleRef();
-  var codeMirror = CodeMirror(document.getElementById('firepad-container'), { lineWrapping: true });
+  var codeMirror = CodeMirror(document.getElementById('feature'), { lineWrapping: true });
   var firepad = Firepad.fromCodeMirror(firepadRef, codeMirror,
   { richTextToolbar: true, richTextShortcuts: true });
   firepad.on('ready', function() {
