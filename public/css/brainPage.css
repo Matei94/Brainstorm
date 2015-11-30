@@ -38,20 +38,27 @@ body {
 	float: left;
 }
 
-#online {
+#center {
 
 	height: 85%;
-	width: 15%;
-	float: left;
+	width: 100%;
+}
+
+#online {
+
+	height: 100%;
+	width: 14.8%;
 	font-size: 2vw;
     border: 0.1vw solid #000;
+	float: left;
 }
 
 #feature {
 
-	height: 85%;
-	width: 100%;
+	height: 100%;
+	width: 84.8%;
     border: 0.1vw solid #000;
+    float: left;
 }
 
 #bottom {
