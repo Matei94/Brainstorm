@@ -87,7 +87,7 @@ function collapseChat() {
 }
 
 function showTextEditor () {
-    $(".tab1").click(function() {
+    $("#tab1").click(function() {
         var firepadRef = getExampleRef()
         var codeMirror = CodeMirror(document.getElementById('feature'), { lineWrapping: true });
         var firepad = Firepad.fromCodeMirror(firepadRef, codeMirror,

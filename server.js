@@ -26,7 +26,7 @@ app.set('port', (process.env.PORT || 5000));
 
 /* Main page */
 app.get('/', function(req, res) {
-  res.sendFile(__dirname + "/" + "index.html" );
+  res.sendFile(__dirname + "/" + "brainPage.html" );
 });
 
 /* Session */
