@@ -31,10 +31,12 @@ app.get('/', function(req, res) {
 
 /* Session */
 app.get('/session', function(req, res) {
-  res.send(randomstring.generate({
-    length: 12,
-    charset: 'alphabetic'
-  }));
+  // res.send(randomstring.generate({
+  //   length: 12,
+  //   charset: 'alphabetic'
+  // }));
+
+  res.send("session1");
 });
 
 /* Database cleaning */
