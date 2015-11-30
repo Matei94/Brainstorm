@@ -38,31 +38,27 @@ body {
 	float: left;
 }
 
-#online {
-
-	height: 85%;
-	width: 15%;
-	float: left;
-	font-size: 2vw;
-    border: 0.1vw solid #000;
-}
-
-#features {
+#center {
 
 	height: 85%;
 	width: 100%;
-    border: 0.1vw solid #000;
 }
 
-#textEditor,
-#whiteboard,
-#codeEditor {
+#online {
 
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
+	height: 100%;
+	width: 14.8%;
+	font-size: 2vw;
+    border: 0.1vw solid #000;
+	float: left;
+}
+
+#feature {
+
+	height: 100%;
+	width: 84.8%;
+    border: 0.1vw solid #000;
+    float: left;
 }
 
 #bottom {
