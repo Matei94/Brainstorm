@@ -15,7 +15,7 @@ app.set('port', (process.env.PORT || 5000));
 
 /* Main page */
 app.get('/', function(req, res) {
-  res.send("Hello word");
+  res.sendFile(__dirname + "/" + "index.html" );
 });
 
 /* Start server */
