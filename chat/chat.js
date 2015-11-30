@@ -1,5 +1,5 @@
 // CREATE A REFERENCE TO FIREBASE
-var messagesRef = new Firebase('https://pgphhot7lw6.firebaseio-demo.com/');
+var messagesRef = new Firebase('https://matei.firebaseio.com/chat_session1');
 
 // REGISTER DOM ELEMENTS
 var messageField = $('#messageInput');

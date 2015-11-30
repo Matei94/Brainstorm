@@ -1,0 +1,27 @@
+{
+  "name": "Brainstorm",
+  "version": "0.0.0",
+  "description": "Online collaborative brainstorming",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Matei94/Brainstorm.git"
+  },
+  "keywords": [
+    "brainstorm",
+    "collaborative"
+  ],
+  "author": "Razvan MATEI",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Matei94/Brainstorm/issues"
+  },
+  "homepage": "https://github.com/Matei94/Brainstorm",
+  "dependencies": {
+    "express": "^4.13.3"
+  }
+}
