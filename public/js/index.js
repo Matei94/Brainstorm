@@ -27,14 +27,12 @@ $(document).ready(function() {
 
 function addOnlineUser(username) {
   $('<div>').text(username).prepend($('<em/>').text('')).appendTo($('#online'));
-  $('#online')[0].scrollTop = $('#highscore')[0].scrollHeight;
+  $('#online')[0].scrollTop = $('#online')[0].scrollHeight;
 }
 
 
 function setUsername() {
-  do {
-    username = prompt("Enter your name here (at least 4 characters)");
-  } while (username == null || username.length < 4);
+  username = prompt("Enter your name here (at least 4 characters)");
 }
 
 
@@ -46,8 +44,8 @@ function collapseChat() {
 
 
 function onSessionId(sessionId) {
-  var sessionId = window.location.pathname.substring(1);
-  if (sessionId.length > 0) {
+  var pathname = window.location.pathname;
+  if (pathname == '/') {
     $('#shareLink').attr("href", window.location.href + sessionId);
     $('#shareLink').text(window.location.href + sessionId);
   } else {
