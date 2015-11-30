@@ -49,11 +49,13 @@ function onSessionId(sessionId) {
 
 
 function setTextEditor(sessionId) {
-  var firepadRef = new Firebase('https://matei.firebaseio-demo.com/'+ sessionId + "/text");
-  var codeMirror = CodeMirror(document.getElementById('firepad-container'),
-    { lineWrapping: true });
-  var firepad = Firepad.fromCodeMirror(firepadRef, codeMirror,
-    { richTextToolbar: true, richTextShortcuts: true });
+  $("#tab1").click(function() {
+    var firepadRef = new Firebase('https://matei.firebaseio-demo.com/'+ sessionId + "/text");
+    var codeMirror = CodeMirror(document.getElementById('feature'),
+      { lineWrapping: true });
+    var firepad = Firepad.fromCodeMirror(firepadRef, codeMirror,
+      { richTextToolbar: true, richTextShortcuts: true });
+  });
 }
 
 
@@ -109,7 +111,6 @@ function showTextEditor () {
                 firepad.setHtml('<span style="font-size: 24px;">Rich-text editing with <span style="color: red">Firepad!</span></span><br/><br/>Collaborative-editing made easy.\n');
             }
         });
-
     });
 }
 

@@ -44,7 +44,7 @@ app.get('/:id', function(req, res) {
   /* Join session */
   else {
     if (sessions.indexOf(req.params.id) != -1) {
-      res.sendFile(__dirname + "/" + "index.html" );
+      res.sendFile(__dirname + "/" + "brainPage.html" );
     } else {
       res.send("404 Not found");
     }
