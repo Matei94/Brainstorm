@@ -266,13 +266,13 @@ sDAAgD+AICAAcBAIEAgQCBAIEABQMBgAAAABgAAAAACAAHAAAMABwALAA8AEwAWAAARIRUhFyEVIRUhF
   -webkit-font-smoothing: antialiased;
 }
 .firepad-tb-bold:before {
- content: url(/home/alex/Pictures/ic_bold.png);
+ content: url(../res/text-bold.png);
 }
 .firepad-tb-italic:before {
-  content: "\e001";
+  content: url(../res/text-italic.png);
 }
 .firepad-tb-underline:before {
-  content: "\e002";
+  content: url(../res/text-underline.png);
 }
 .firepad-tb-strikethrough:before {
   content: "\e003";
