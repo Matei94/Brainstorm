@@ -53,12 +53,43 @@ body {
 	float: left;
 }
 
-#feature {
+#container {
 
 	height: 100%;
 	width: 84.8%;
     border: 0.1vw solid #000;
     float: left;
+    position: relative;
+}
+
+#feature,
+#whiteboard {
+
+	height: 100%;
+	width: 100%;
+    position: absolute;
+}
+
+#feature {
+
+	z-index: 1;
+}
+
+#whiteboard {
+
+	z-index: 0;
+}
+
+#canvas {
+
+	height: 95%;
+	width: 100%;
+}
+
+#colorPicker {
+
+	height: 5%;
+	width: 100%;
 }
 
 #bottom {

@@ -17,9 +17,6 @@ $(document).ready(function() {
   } else {
     $.get("/session", onSessionId);
   }
-  collapseChat();
-  setUsername();
-  draw();
 });
 
 /*****************************************************************************/
@@ -27,6 +24,12 @@ $(document).ready(function() {
 
 
 /*** FUNCTIONS ***************************************************************/
+
+function addOnlineUser(username) {
+  $('<div>').text(username).prepend($('<em/>').text('')).appendTo($('#online'));
+  $('#online')[0].scrollTop = $('#highscore')[0].scrollHeight;
+}
+
 
 function setUsername() {
   do {
@@ -43,12 +46,42 @@ function collapseChat() {
 
 
 function onSessionId(sessionId) {
-  console.log("sessionId = " + sessionId);
+  var sessionId = window.location.pathname.substring(1);
+  if (sessionId.length > 0) {
+    $('#shareLink').attr("href", window.location.href + sessionId);
+    $('#shareLink').text(window.location.href + sessionId);
+  } else {
+    $('#shareLink').attr("href", window.location.href);
+    $('#shareLink').text(window.location.href);
+  }
 
+  collapseChat();
+  setUsername();
+
+  setOnlineUsers(sessionId);
   setTextEditor(sessionId);
+  showWhiteboard();
   setChat(sessionId);
 }
+function setOnlineUsers(sessionId) {
+  var onlineUsersRef = new Firebase('https://matei.firebaseio.com/' + sessionId + "/users");
+  onlineUsersRef.on('child_added', function (snapshot) {
+    var data = snapshot.val();
+    var username = data.username || "anonymous";
 
+    addOnlineUser(username);
+  });
+
+  onlineUsersRef.on('child_removed', function (snapshot) {
+    var data = snapshot.val();
+    var username = data.username || "anonymous";
+
+    alert(username + " disconnected")
+  });
+
+  var userRef = onlineUsersRef.push({username: username});
+  userRef.onDisconnect().remove();
+}
 function setTextEditor(sessionId) {
   $("#tab1").click(function() {
     var firepadRef = new Firebase('https://matei.firebaseio-demo.com/'+ sessionId + "/text");
@@ -107,7 +140,7 @@ function draw() {
     var pixelDataRef = new Firebase('https://iqlda6d7y3d.firebaseio-demo.com/');
 
     // Set up our canvas
-    var myCanvas = document.getElementById('drawing-canvas');
+    var myCanvas = document.getElementById('');
     var myContext = myCanvas.getContext ? myCanvas.getContext('2d') : null;
     if (myContext == null) {
       alert("You must use a browser that supports HTML5 Canvas to run this demo.");
@@ -124,7 +157,7 @@ function draw() {
           currentColor = col;
         };
       })());
-      item.appendTo('#colorholder');
+      item.appendTo('#colorPicker');
     }
 
     //Keep track of if the mouse is up or down
@@ -181,5 +214,13 @@ function draw() {
     pixelDataRef.on('child_added', drawPixel);
     pixelDataRef.on('child_changed', drawPixel);
     pixelDataRef.on('child_removed', clearPixel);
+}
+
+function showWhiteboard() {
+    $("#tab2").click(function() {
+        console.print("pula");
+        $("#whiteboard").css("z-index", 1);
+        $("#feature").css("z-index", 0);
+    });
 }
 /*****************************************************************************/

@@ -1,36 +1,45 @@
 <html>
     <head>
+        <!-- Scripts -->
         <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
         <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.2.0/codemirror.js"></script>
-
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.2.0/codemirror.css"/>
-
-        <link rel="stylesheet" type="text/css" href="css/firepad.css"/>
-        <link rel="stylesheet" type="text/css" href="css/drawing.css">
-        
         <script src="https://cdn.firebase.com/libs/firepad/1.2.0/firepad.min.js"></script>
-	
-		<link rel="stylesheet" type="text/css" href="css/brainPage.css">
-		
-	</head>
-	<body id="background">
-	
-		<div id="tabs">
-			<button id="tab1"><b>Text Editor</b></button>
-			<button id="tab2"><b>Whiteboard</b></button>
-			<button id="tab3"><b>Code Editor</b></button>
-		</div>
-		<div id="center">
-			<div id="online"><b>ONLINE</b></div>
-			<div id="feature">
-			</div>
-		</div>
-		<div id="bottom">
-			<div id="shareLinkText"><b>Share with colaborators</b></div>
-			<a id="shareLink" href="url"><b>Link to share</b></a>
-		</div>
 
+        <!-- CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.2.0/codemirror.css"/>
+        <link rel="stylesheet" type="text/css" href="css/firepad.css"/>
+        
+        <link rel="stylesheet" type="text/css" href="css/index.css"/>
+        <link rel="stylesheet" type="text/css" href="css/brainPage.css"/>
+    </head>
+
+    <body id="background">
+
+        <!-- Tabs -->
+        <div id="tabs">
+            <button id="tab1"><b>Text Editor</b></button>
+            <button id="tab2"><b>Whiteboard</b></button>
+            <button id="tab3"><b>Code Editor</b></button>
+        </div>
+
+        <!-- Center page -->
+        <div id="center">
+            <div id="online"><b>ONLINE</b></div>
+            <div id="container">
+	            <div id="feature"></div>
+	            <div id="whiteboard">
+	            	<canvas id="canvas"></canvas>
+	            	<div id="colorPicker"></div>
+	            </div>
+	        </div>
+        </div>
+
+        <!-- Bottom -->
+        <div id="bottom">
+            <div id="shareLinkText"><b>Share with colaborators</b></div>
+            <a id="shareLink" href=""><b>Link to share</b></a>
+        </div>
         <!-- Chat -->
         <div class="example-chat l-demo-container">
             <header class='chat-header'>Chat</header>
@@ -43,6 +52,8 @@
                 </footer>
             </div>
         </div>
+        
+        <!-- Controller -->
         <script src='js/index.js'></script>
     </body>
 </html>
