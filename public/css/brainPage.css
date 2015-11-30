@@ -37,3 +37,18 @@ body {
 	font-size: 2em;
 	float: left;
 }
+
+#online {
+
+	height: 85%;
+	width: 15%;
+	border: 0.2vw solid #000;
+	float: left;
+}
+
+#feature {
+
+	height: 85%;
+	width: 99.7%;
+	border: 0.2vw solid #000;
+}
