@@ -1,6 +1,7 @@
 /*** VARIABLES ***************************************************************/
 
 var username;
+var onlineUsersRef;
 
 /*****************************************************************************/
 
@@ -15,9 +16,6 @@ $(document).ready(function() {
   } else {
     $.get("/session", onSessionId);
   }
-
-  collapseChat();
-  setUsername();
 });
 
 /*****************************************************************************/
@@ -25,6 +23,12 @@ $(document).ready(function() {
 
 
 /*** FUNCTIONS ***************************************************************/
+
+function addOnlineUser(username) {
+  $('<div>').text(username).prepend($('<em/>').text('')).appendTo($('#online'));
+  $('#online')[0].scrollTop = $('#highscore')[0].scrollHeight;
+}
+
 
 function setUsername() {
   do {
@@ -41,17 +45,34 @@ function collapseChat() {
 
 
 function onSessionId(sessionId) {
-  console.log("sessionId = " + sessionId);
+  var sessionId = window.location.pathname.substring(1);
+  if (sessionId.length > 0) {
+    $('#shareLink').attr("href", window.location.href + sessionId);
+    $('#shareLink').text(window.location.href + sessionId);
+  } else {
+    $('#shareLink').attr("href", window.location.href);
+    $('#shareLink').text(window.location.href);
+  }
 
-  // $('#shareLinkText').text(function(i, oldText) {
-  //   return "Session id: " + sessionId;
-  // });
+  collapseChat();
+  setUsername();
 
-  $('#shareLink').attr("href", window.location.href + sessionId);
-  $('#shareLink').text(window.location.href + sessionId);
-
+  setOnlineUsers(sessionId);
   setTextEditor(sessionId);
   setChat(sessionId);
+}
+
+
+function setOnlineUsers(sessionId) {
+  var onlineUsersRef = new Firebase('https://matei.firebaseio.com/' + sessionId + "/users");
+  onlineUsersRef.on('child_added', function (snapshot) {
+    var data = snapshot.val();
+    var username = data.username || "anonymous";
+
+    addOnlineUser(username);
+  });
+
+  onlineUsersRef.push({username: username});
 }
 
 
