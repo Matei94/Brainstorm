@@ -1,7 +1,6 @@
 /*** VARIABLES ***************************************************************/
 
 var username;
-var onlineUsersRef;
 
 /*****************************************************************************/
 
@@ -72,7 +71,15 @@ function setOnlineUsers(sessionId) {
     addOnlineUser(username);
   });
 
-  onlineUsersRef.push({username: username});
+  onlineUsersRef.on('child_removed', function (snapshot) {
+    var data = snapshot.val();
+    var username = data.username || "anonymous";
+
+    alert(username + " disconnected")
+  });
+
+  var userRef = onlineUsersRef.push({username: username});
+  userRef.onDisconnect().remove();
 }
 
 
