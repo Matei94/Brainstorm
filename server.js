@@ -2,6 +2,7 @@
 
 var express = require('express');
 var Firebase = require("firebase");
+var randomstring = require("randomstring");
 
 /*****************************************************************************/
 
@@ -30,7 +31,10 @@ app.get('/', function(req, res) {
 
 /* Session */
 app.get('/session', function(req, res) {
-  res.send("session1");
+  res.send(randomstring.generate({
+    length: 12,
+    charset: 'alphabetic'
+  }));
 });
 
 /* Database cleaning */
