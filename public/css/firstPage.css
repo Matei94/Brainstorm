@@ -21,7 +21,7 @@ body {
 
 #abousUs {
 
-	font-size: 3em;
+	font-size: 2.5em;
     color: #fff;
     background-color: #0000ff;
 	margin-right: 25%;
@@ -37,13 +37,14 @@ body {
     margin-right: auto;
     margin-left: auto;
     margin-top: 2%;
+    margin-bottom: 5%;
     width: 40%;
     height: 30%;
 }
 
 #startNew {
 
-    font-size: 2.5em;
+    font-size: 2em;
     color: #000;
     background-color: #ffff00;
     margin-right: auto;
