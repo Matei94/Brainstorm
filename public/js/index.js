@@ -43,6 +43,13 @@ function collapseChat() {
 function onSessionId(sessionId) {
   console.log("sessionId = " + sessionId);
 
+  // $('#shareLinkText').text(function(i, oldText) {
+  //   return "Session id: " + sessionId;
+  // });
+
+  $('#shareLink').attr("href", window.location.href + sessionId);
+  $('#shareLink').text(window.location.href + sessionId);
+
   setTextEditor(sessionId);
   setChat(sessionId);
 }
