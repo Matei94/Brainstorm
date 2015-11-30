@@ -43,16 +43,32 @@ body {
 	height: 85%;
 	width: 15%;
 	float: left;
+	font-size: 2vw;
+    border: 0.1vw solid #000;
 }
 
 #feature {
 
 	height: 85%;
 	width: 100%;
+    border: 0.1vw solid #000;
 }
 
-#shareLink {
+#bottom {
 
 	height: 10%;
 	width: 100%;
+}
+
+#shareLinkText {
+
+	margin-right: 70%;
+	font-size: 2vw;
+}
+
+#link {
+
+	margin-right: 70%;
+	font-size: 1.5vw;
+	border: 0.1vw solid #000;
 }
