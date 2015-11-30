@@ -37,6 +37,9 @@ app.get('/:id', function(req, res) {
       length: 12,
       charset: 'alphabetic'
     });
+
+    console.log("New session: " + sessionId);
+
     sessions.push(sessionId);
     res.send(sessionId);
   }
@@ -44,8 +47,12 @@ app.get('/:id', function(req, res) {
   /* Join session */
   else {
     if (sessions.indexOf(req.params.id) != -1) {
+      console.log("New join success at " + req.params.id);
+
       res.sendFile(__dirname + "/" + "brainPage.html" );
     } else {
+      console.log("Join failed at " + req.params.id);
+
       res.send("404 Not found");
     }
   }
