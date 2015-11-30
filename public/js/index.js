@@ -99,18 +99,18 @@ function setChat(sessionId) {
 
 
 function showTextEditor () {
-  $(".tab1").click(function() {
-      var firepadRef = getExampleRef()
-      var codeMirror = CodeMirror(document.getElementById('feature'), { lineWrapping: true });
-      var firepad = Firepad.fromCodeMirror(firepadRef, codeMirror,
-      { richTextToolbar: true, richTextShortcuts: true });
-      firepad.on('ready', function() {
-          if (firepad.isHistoryEmpty()) {
-              firepad.setHtml('<span style="font-size: 24px;">Rich-text editing with <span style="color: red">Firepad!</span></span><br/><br/>Collaborative-editing made easy.\n');
-          }
-      });
+    $("#tab1").click(function() {
+        var firepadRef = getExampleRef()
+        var codeMirror = CodeMirror(document.getElementById('feature'), { lineWrapping: true });
+        var firepad = Firepad.fromCodeMirror(firepadRef, codeMirror,
+        { richTextToolbar: true, richTextShortcuts: true });
+        firepad.on('ready', function() {
+            if (firepad.isHistoryEmpty()) {
+                firepad.setHtml('<span style="font-size: 24px;">Rich-text editing with <span style="color: red">Firepad!</span></span><br/><br/>Collaborative-editing made easy.\n');
+            }
+        });
 
-  });
+    });
 }
 
 /*****************************************************************************/
