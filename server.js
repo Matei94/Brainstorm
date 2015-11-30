@@ -28,6 +28,11 @@ app.get('/', function(req, res) {
   res.sendFile(__dirname + "/" + "index.html" );
 });
 
+/* Session */
+app.get('/session', function(req, res) {
+  res.send("session1");
+});
+
 /* Database cleaning */
 firebaseRef.remove(function(err) {
   if (err) {
