@@ -18,28 +18,31 @@ body {
 #tab1 {
 
 	height: 100%;
+	font-family: "Helvetica Neue Light";
 	width: 33.3%;
 	font-size: 2vw;
 	float: left;
-    background-color: #1ea6f5
+    background-color: #ff9933;
 }
 
 #tab2 {
 
 	height: 100%;
+	font-family: "Helvetica Neue Light";
 	width: 33.3%;
 	font-size: 2vw;
 	float: left;
-    background-color: #1ef5ee
+    background-color: gray;
 }
 
 #tab3 {
 
 	height: 100%;
+	font-family: "Helvetica Neue Light";
 	width: 33.3%;
 	font-size: 2vw;
 	float: left;
-    background-color: #1ef5ee
+    background-color: gray;
 }
 
 #center {
@@ -54,12 +57,14 @@ body {
 	font-size: 2vw;
     border: 0.1vw solid #000;
 	float: left;
-    background-color: #ff5759
+    background-color: gray;
+    border-radius: 10px;
 }
 
 #textOnline {
 
 	height: 10%;
+	font-family: "Helvetica Neue Light";
 	font-size: 2vw;
 	width: 100%;
 }
@@ -67,6 +72,7 @@ body {
 #users {
 
 	height: 90%;
+	font-family: "Helvetica Neue Light";
 	overflow: auto;
 	font-size: 2vw;
 	width: 100%;
@@ -82,6 +88,7 @@ body {
     border: 0.1vw solid #000;
     float: left;
     position: relative;
+    border-radius: 10px;
 }
 
 #feature,
@@ -131,14 +138,19 @@ body {
 
 	height: 10%;
 	width: 100%;
+	background-color: #003366;
+    border-radius: 10px;
 }
 
 #shareButton {
-    width: 14.8%;
+    width: 30%;
+	font-family: "Helvetica Neue Light";
     font-size: 2vw;
     border: 0.1vw solid #000;
     float: left;
-    background-color: #1ef5ee
+    margin-top: 1.5%;
+    background-color: #1ef5ee;
+    border-radius: 25px;
 }
 
 #shareButton:hover {
