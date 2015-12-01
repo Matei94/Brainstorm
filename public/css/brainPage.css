@@ -6,6 +6,7 @@ body {
     text-align: center;
     margin-left:auto;
     margin-right:auto;
+    margin-top: 0%;
 }
 
 #tabs {
@@ -123,15 +124,7 @@ body {
 	width: 100%;
 }
 
-#shareLinkText {
-
+#shareButton {
 	margin-right: 70%;
 	font-size: 2vw;
-}
-
-#shareLink {
-
-	margin-right: 70%;
-	font-size: 1.5vw;
-	border: 0.1vw solid #000;
 }
