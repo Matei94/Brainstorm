@@ -62,8 +62,7 @@ function onSessionId(sessionId) {
         setOnlineUsers(sessionId);
         setTextEditor(sessionId);
         setChat(sessionId);
-        showWhiteboard();
-        draw();
+        setWhiteboard(sessionId);
       }
     }
   });
@@ -94,21 +93,25 @@ function setOnlineUsers(sessionId) {
 
 
 function setTextEditor(sessionId) {
-  $("#tab1").click(function() {
-    if (textEditorReady == false) {
-      textEditorReady = true;
-      var firepadRef = new Firebase('https://matei.firebaseio-demo.com/'+ sessionId + "/text");
-      var codeMirror = CodeMirror(document.getElementById('feature'),
-      { lineWrapping: true });
-      var firepad = Firepad.fromCodeMirror(firepadRef, codeMirror,
-      { richTextToolbar: true, richTextShortcuts: true });
-    }
-    $("#whiteboard").css("z-index", 0);
-    $("#canvas").css("z-index", 0);
-    $("#colorPicker").css("z-index", 0);
-    $("#feature").css("z-index", 10);
-    $("#canvas").css("opacity", 0.0);
-  });
+
+        $("#tab1").click(function() {
+            if (textEditorReady == false) {
+                textEditorReady = true;
+                var firepadRef = new Firebase('https://matei.firebaseio-demo.com/'+ sessionId + "/text");
+                var codeMirror = CodeMirror(document.getElementById('feature'),
+                { lineWrapping: true });
+                var firepad = Firepad.fromCodeMirror(firepadRef, codeMirror,
+                { richTextToolbar: true, richTextShortcuts: true });
+            }
+            $("#whiteboard").css("z-index", 0);
+            $("#canvas").css("z-index", 0);
+            $("#colorPicker").css("z-index", 0);
+            $("#feature").css("z-index", 10);
+
+            $("#canvas").css("opacity", 0.0);
+            $("#colorPicker").css("opacity", 0.0);
+            $("#feature").css("opacity", 1.0);
+        });
 }
 
 
@@ -153,12 +156,12 @@ function setChat(sessionId) {
 }
 
 
-function draw() {
+function setWhiteboard(sessionId) {
     //Set up some globals
     var pixSize = 8, lastPoint = null, currentColor = "000", mouseDown = 0;
 
     //Create a reference to the pixel data for our drawing.
-    var pixelDataRef = new Firebase('https://iqlda6d7y3d.firebaseio-demo.com/');
+    var pixelDataRef = new Firebase('https://matei.firebaseio.com/' + sessionId + "/draw");
 
     // Set up our canvas
     var myCanvas = document.getElementById('canvas');
@@ -235,16 +238,16 @@ function draw() {
     pixelDataRef.on('child_added', drawPixel);
     pixelDataRef.on('child_changed', drawPixel);
     pixelDataRef.on('child_removed', clearPixel);
-}
 
-
-function showWhiteboard() {
     $("#tab2").click(function() {
-      $("#whiteboard").css("z-index", 10);
-       $("#canvas").css("z-index", 11);
+        $("#whiteboard").css("z-index", 10);
+        $("#canvas").css("z-index", 11);
         $("#colorPicker").css("z-index", 11);
-      $("#feature").css("z-index", 0);
-      console.log($("#feature").css("z-index"));
+        $("#feature").css("z-index", 0);
+
+        $("#canvas").css("opacity", 1.0);
+        $("#colorPicker").css("opacity", 1.0);
+        $("#feature").css("opacity", 0.0);
     });
 }
 
