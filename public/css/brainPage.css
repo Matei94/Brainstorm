@@ -111,7 +111,7 @@ body {
 #canvas {
   opacity: 0.0;
   height: 95%;
-  width: 100%;
+  width: 100%; 
   z-index: 0;
 }
 
