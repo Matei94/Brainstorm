@@ -1,6 +1,6 @@
 /*** VARIABLES ***************************************************************/
 
-var username;
+var gUsername;
 
 /*****************************************************************************/
 
@@ -24,15 +24,7 @@ $(document).ready(function() {
 /*** FUNCTIONS ***************************************************************/
 
 function addOnlineUser(username) {
-  // $('<div>').text(username).prepend($('<em/>').text('')).appendTo($('#online'));
-  // $('#online')[0].scrollTop = $('#online')[0].scrollHeight;
-
   $("#users").append('<li id="' + username + '">' + username + '</li>');
-}
-
-
-function setUsername() {
-  username = prompt("Enter your name here (at least 4 characters)");
 }
 
 
@@ -44,6 +36,7 @@ function collapseChat() {
 
 
 function onSessionId(sessionId) {
+  /* Set share link */
   var pathname = window.location.pathname;
   if (pathname == '/') {
     $('#shareLink').attr("href", window.location.href + sessionId);
@@ -53,12 +46,25 @@ function onSessionId(sessionId) {
     $('#shareLink').text(window.location.href);
   }
 
-  collapseChat();
-  setUsername();
+  /* Set username */
+  var dialog = document.getElementById('name-dialog');
+  dialog.showModal();
 
-  setOnlineUsers(sessionId);
-  setTextEditor(sessionId);
-  setChat(sessionId);
+  $('#name').keypress(function(e) {
+    if (e.keyCode == 13) {
+      var name = $('#name').val();
+      if (name.length >= 4) {
+        gUsername = name;
+        dialog.close();
+
+        setOnlineUsers(sessionId);
+        setTextEditor(sessionId);
+        setChat(sessionId);
+      }
+    }
+  });
+
+  collapseChat();
 }
 
 
@@ -78,7 +84,7 @@ function setOnlineUsers(sessionId) {
     $('#' + username).remove();
   });
 
-  var userRef = onlineUsersRef.push({username: username});
+  var userRef = onlineUsersRef.push({username: gUsername});
   userRef.onDisconnect().remove();
 }
 
@@ -108,7 +114,7 @@ function setChat(sessionId) {
       var message = messageField.val();
 
       //SAVE DATA TO FIREBASE AND EMPTY FIELD
-      messagesRef.push({name:username, text:message});
+      messagesRef.push({name:gUsername, text:message});
       messageField.val('');
     }
   });
