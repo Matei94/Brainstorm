@@ -276,7 +276,7 @@ sDAAgD+AICAAcBAIEAgQCBAIEABQMBgAAAABgAAAAACAAHAAAMABwALAA8AEwAWAAARIRUhFyEVIRUhF
   content: url(../res/text-underline.png);
 }
 .firepad-tb-strikethrough:before {
-  content: "\e003";
+  content: url(../res/text-strike.png);
 }
 .firepad-tb-list:before {
   content: "\e004";

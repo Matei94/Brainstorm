@@ -2,8 +2,6 @@
 
 var gUsername;
 
-var textEditorReady = false;
-
 /*****************************************************************************/
 
 
@@ -51,10 +49,10 @@ function onSessionId(sessionId) {
         setTextEditor(sessionId);
         setChat(sessionId);
         setWhiteboard(sessionId);
+        setCodeEditor(sessionId);
       }
     }
   });
-
   collapseChat();
 }
 
@@ -91,15 +89,39 @@ function setTextEditor(sessionId) {
     $("#whiteboard").css("z-index", 0);
     $("#canvas").css("z-index", 0);
     $("#colorPicker").css("z-index", 0);
-
+    $("#codeEditor").css("z-index", 0);
     $("#feature").css("z-index", 1);
 
+    $("#whiteboard").css("opacity", 0.0);
     $("#canvas").css("opacity", 0.0);
     $("#colorPicker").css("opacity", 0.0);
+    $("#codeEditor").css("opacity", 0.0);
     $("#feature").css("opacity", 1.0);
   });
 }
 
+
+function setCodeEditor(sessionId) {
+  var firepadRef = new Firebase('https://matei.firebaseio-demo.com/'+ sessionId + "/code");
+  var codeMirror = CodeMirror(document.getElementById('codeEditor'),
+  { lineNumbers: true, mode: 'javascript' });
+  var firepad = Firepad.fromCodeMirror(firepadRef, codeMirror,
+  { defaultText: '// Write your JavaScript code here'});
+
+  $("#tab3").click(function() {
+    $("#whiteboard").css("z-index", 0);
+    $("#canvas").css("z-index", 0);
+    $("#colorPicker").css("z-index", 0);
+    $("#codeEditor").css("z-index", 1);
+    $("#feature").css("z-index", 0);
+
+    $("#whiteboard").css("opacity", 0.0);
+    $("#canvas").css("opacity", 0.0);
+    $("#colorPicker").css("opacity", 0.0);
+    $("#codeEditor").css("opacity", 1.0);
+    $("#feature").css("opacity", 0.0);
+  });
+}
 
 function setChat(sessionId) {
   var messagesRef = new Firebase('https://matei.firebaseio.com/' + sessionId + "/chat");
@@ -229,12 +251,13 @@ function setWhiteboard(sessionId) {
     $("#whiteboard").css("z-index", 1);
     $("#canvas").css("z-index", 1);
     $("#colorPicker").css("z-index", 1);
-
+    $("#codeEditor").css("z-index", 0);
     $("#feature").css("z-index", 0);
 
+    $("#whiteboard").css("opacity", 1.0);
     $("#canvas").css("opacity", 1.0);
     $("#colorPicker").css("opacity", 1.0);
-
+    $("#codeEditor").css("opacity", 0.0);
     $("#feature").css("opacity", 0.0);
   });
 }
