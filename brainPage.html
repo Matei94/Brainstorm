@@ -12,10 +12,12 @@
         <link rel="stylesheet" type="text/css" href="css/firepad.css"/>
         <link rel="stylesheet" type="text/css" href="css/index.css"/>
         <link rel="stylesheet" type="text/css" href="css/brainPage.css"/>
+        
+        
     </head>
 
     <body id="background">
-
+        
         <!-- Tabs -->
         <div id="tabs">
             <button id="tab1"><b>Text Editor</b></button>
@@ -32,7 +34,11 @@
             <div id="container">
 	            <div id="feature"></div>
 	            <div id="whiteboard">
-	            	<canvas id="canvas" width="1734" height="892.5"></canvas>
+                    <script>
+                        var width = $("#whiteboard").css("width");
+                        var height = $("#whiteboard").css("height");
+                        $("#whiteboard").append('<canvas id="canvas" width=' + width + ' height=' + height + '></canvas>');
+                    </script>
 	            	<div id="colorPicker"></div>
 	            </div>
 	            <div id="codeEditor"></div>
