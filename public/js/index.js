@@ -1,6 +1,7 @@
 /*** VARIABLES ***************************************************************/
 
 var gUsername;
+var gChatCollapsed = false;
 
 /*****************************************************************************/
 
@@ -9,8 +10,6 @@ var gUsername;
 /*** DOCUMENT READY **********************************************************/
 
 $(document).ready(function() {
-  
-    
   var sessionId = window.location.pathname.substring(1);
   if (sessionId.length > 0 && sessionId != 'start') {
     onSessionId(sessionId);
@@ -148,6 +147,10 @@ function setChat(sessionId) {
 
   // Add a callback that is triggered for each chat message.
   messagesRef.on('child_added', function (snapshot) {
+    if (gChatCollapsed) {
+      $(".chat-header").css("color", "red");
+    }
+
     //GET DATA
     var data = snapshot.val();
     var username = data.name || "anonymous";
@@ -294,6 +297,10 @@ function setShareButtonBehaviour(sessionId) {
 function collapseChat() {
   $(".chat-header").click(function() {
     $(".chat-content").slideToggle(500);
+    if (gChatCollapsed) {
+      $(".chat-header").css("color", "#999");
+    }
+    gChatCollapsed = !gChatCollapsed;
   });
 }
 
