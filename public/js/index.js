@@ -1,6 +1,6 @@
 /*** VARIABLES ***************************************************************/
 
-var username;
+var gUsername;
 
 var textEditorReady = false;
 var codeEditorReady = false;
@@ -27,15 +27,7 @@ $(document).ready(function() {
 /*** FUNCTIONS ***************************************************************/
 
 function addOnlineUser(username) {
-  // $('<div>').text(username).prepend($('<em/>').text('')).appendTo($('#online'));
-  // $('#online')[0].scrollTop = $('#online')[0].scrollHeight;
-
   $("#users").append('<li id="' + username + '">' + username + '</li>');
-}
-
-
-function setUsername() {
-  username = prompt("Enter your name here (at least 4 characters)");
 }
 
 
@@ -47,6 +39,7 @@ function collapseChat() {
 
 
 function onSessionId(sessionId) {
+  /* Set share link */
   var pathname = window.location.pathname;
   if (pathname == '/') {
     $('#shareLink').attr("href", window.location.href + sessionId);
@@ -56,16 +49,29 @@ function onSessionId(sessionId) {
     $('#shareLink').text(window.location.href);
   }
 
-  collapseChat();
-  setUsername();
+  /* Set username */
+  var dialog = document.getElementById('name-dialog');
+  dialog.showModal();
 
-  setOnlineUsers(sessionId);
-  setTextEditor(sessionId);
-  setCodeEditor(sessionId);
-  showWhiteboard();
-  draw();
-  setChat(sessionId);
+  $('#name').keypress(function(e) {
+    if (e.keyCode == 13) {
+      var name = $('#name').val();
+      if (name.length >= 4) {
+        gUsername = name;
+        dialog.close();
+
+        setOnlineUsers(sessionId);
+        setTextEditor(sessionId);
+        setChat(sessionId);
+        setWhiteboard(sessionId);
+        setCodeEditor(sessionId);
+      }
+    }
+  });
+  collapseChat();
 }
+
+
 function setOnlineUsers(sessionId) {
   var onlineUsersRef = new Firebase('https://matei.firebaseio.com/' + sessionId + "/users");
   onlineUsersRef.on('child_added', function (snapshot) {
@@ -82,11 +88,13 @@ function setOnlineUsers(sessionId) {
     $('#' + username).remove();
   });
 
-  var userRef = onlineUsersRef.push({username: username});
+  var userRef = onlineUsersRef.push({username: gUsername});
   userRef.onDisconnect().remove();
 }
+
+
 function setTextEditor(sessionId) {
-    
+
         $("#tab1").click(function() {
             if (textEditorReady == false) {
                 textEditorReady = true;
@@ -95,7 +103,7 @@ function setTextEditor(sessionId) {
                 { lineWrapping: true });
                 var firepad = Firepad.fromCodeMirror(firepadRef, codeMirror,
                 { richTextToolbar: true, richTextShortcuts: true });
-            }    
+            }
             $("#whiteboard").css("z-index", 0);
             $("#canvas").css("z-index", 0);
             $("#colorPicker").css("z-index", 0);
@@ -147,7 +155,7 @@ function setChat(sessionId) {
       var message = messageField.val();
 
       //SAVE DATA TO FIREBASE AND EMPTY FIELD
-      messagesRef.push({name:username, text:message});
+      messagesRef.push({name:gUsername, text:message});
       messageField.val('');
     }
   });
@@ -173,13 +181,13 @@ function setChat(sessionId) {
   });
 }
 
-function draw() {
-    
+
+function setWhiteboard(sessionId) {
     //Set up some globals
     var pixSize = 8, lastPoint = null, currentColor = "000", mouseDown = 0;
 
     //Create a reference to the pixel data for our drawing.
-    var pixelDataRef = new Firebase('https://iqlda6d7y3d.firebaseio-demo.com/');
+    var pixelDataRef = new Firebase('https://matei.firebaseio.com/' + sessionId + "/draw");
 
     // Set up our canvas
     var myCanvas = document.getElementById('canvas');
@@ -256,9 +264,7 @@ function draw() {
     pixelDataRef.on('child_added', drawPixel);
     pixelDataRef.on('child_changed', drawPixel);
     pixelDataRef.on('child_removed', clearPixel);
-}
 
-function showWhiteboard() {
     $("#tab2").click(function() {
         $("#whiteboard").css("z-index", 10);
         $("#canvas").css("z-index", 11);
@@ -272,4 +278,5 @@ function showWhiteboard() {
         $("#feature").css("opacity", 0.0);
     });
 }
+
 /*****************************************************************************/
