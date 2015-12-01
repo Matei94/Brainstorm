@@ -3,6 +3,7 @@
 var username;
 
 var textEditorReady = false;
+var codeEditorReady = false;
 
 /*****************************************************************************/
 
@@ -60,6 +61,7 @@ function onSessionId(sessionId) {
 
   setOnlineUsers(sessionId);
   setTextEditor(sessionId);
+  setCodeEditor(sessionId);
   showWhiteboard();
   draw();
   setChat(sessionId);
@@ -98,12 +100,39 @@ function setTextEditor(sessionId) {
             $("#canvas").css("z-index", 0);
             $("#colorPicker").css("z-index", 0);
             $("#feature").css("z-index", 10);
+            $('#codeEditor').css("z-index", 0);
             
+            $("#codeEditor").css("opacity", 0.0);
             $("#canvas").css("opacity", 0.0);
             $("#colorPicker").css("opacity", 0.0);
             $("#feature").css("opacity", 1.0);
         });
 }
+
+function setCodeEditor(sessionId) {
+    
+        $("#tab3").click(function() {
+            if (codeEditorReady == false) {
+                codeEditorReady = true;
+                var firepadRef = new Firebase('https://matei.firebaseio-demo.com/'+ sessionId + "/code");
+                var codeMirror = CodeMirror(document.getElementById('codeEditor'),
+                { lineNumbers: true, mode: 'javascript' });
+                var firepad = Firepad.fromCodeMirror(firepadRef, codeMirror,
+                { defaultText: '// Write your JavaScript code here'});
+            }    
+            $("#whiteboard").css("z-index", 0);
+            $("#canvas").css("z-index", 0);
+            $("#colorPicker").css("z-index", 0);
+            $("#feature").css("z-index", 0);
+            $('#codeEditor').css("z-index", 10);
+            
+            $("#codeEditor").css("opacity", 1.0);
+            $("#canvas").css("opacity", 0.0);
+            $("#colorPicker").css("opacity", 0.0);
+            $("#feature").css("opacity", 0.0);
+        });
+}
+
 function setChat(sessionId) {
   var messagesRef = new Firebase('https://matei.firebaseio.com/' + sessionId + "/chat");
 
@@ -235,7 +264,9 @@ function showWhiteboard() {
         $("#canvas").css("z-index", 11);
         $("#colorPicker").css("z-index", 11);
         $("#feature").css("z-index", 0);
-        
+        $('#codeEditor').css("z-index", 0);
+            
+        $("#codeEditor").css("opacity", 0.0);
         $("#canvas").css("opacity", 1.0);
         $("#colorPicker").css("opacity", 1.0);
         $("#feature").css("opacity", 0.0);
