@@ -10,7 +10,7 @@ var gUsername;
 
 $(document).ready(function() {
   var sessionId = window.location.pathname.substring(1);
-  if (sessionId.length > 0) {
+  if (sessionId.length > 0 && sessionId != 'start') {
     onSessionId(sessionId);
   } else {
     $.get("/session", onSessionId);
@@ -24,15 +24,7 @@ $(document).ready(function() {
 /*** FUNCTIONS ***************************************************************/
 
 function onSessionId(sessionId) {
-  /* Set share link */
-  var pathname = window.location.pathname;
-  if (pathname == '/') {
-    $('#shareLink').attr("href", window.location.href + sessionId);
-    $('#shareLink').text(window.location.href + sessionId);
-  } else {
-    $('#shareLink').attr("href", window.location.href);
-    $('#shareLink').text(window.location.href);
-  }
+  collapseChat();
 
   /* Set username */
   var dialog = document.getElementById('name-dialog');
@@ -50,10 +42,10 @@ function onSessionId(sessionId) {
         setChat(sessionId);
         setWhiteboard(sessionId);
         setCodeEditor(sessionId);
+        setShareButtonBehaviour(sessionId);
       }
     }
   });
-  collapseChat();
 }
 
 
@@ -86,6 +78,10 @@ function setTextEditor(sessionId) {
   { richTextToolbar: true, richTextShortcuts: true });
 
   $("#tab1").click(function() {
+    $("#tab1").css("backgroundColor", "#1ea6f5");
+    $("#tab2").css("backgroundColor", "#1ef5ee");
+    $("#tab3").css("backgroundColor", "#1ef5ee");
+      
     $("#whiteboard").css("z-index", 0);
     $("#canvas").css("z-index", 0);
     $("#colorPicker").css("z-index", 0);
@@ -109,6 +105,10 @@ function setCodeEditor(sessionId) {
   { defaultText: '// Write your JavaScript code here'});
 
   $("#tab3").click(function() {
+    $("#tab1").css("backgroundColor", "#1ef5ee");
+    $("#tab2").css("backgroundColor", "#1ef5ee");
+    $("#tab3").css("backgroundColor", "#1ea6f5");
+      
     $("#whiteboard").css("z-index", 0);
     $("#canvas").css("z-index", 0);
     $("#colorPicker").css("z-index", 0);
@@ -248,6 +248,10 @@ function setWhiteboard(sessionId) {
   pixelDataRef.on('child_removed', clearPixel);
 
   $("#tab2").click(function() {
+    $("#tab1").css("backgroundColor", "#1ef5ee");
+    $("#tab2").css("backgroundColor", "#1ea6f5");
+    $("#tab3").css("backgroundColor", "#1ef5ee");
+      
     $("#whiteboard").css("z-index", 1);
     $("#canvas").css("z-index", 1);
     $("#colorPicker").css("z-index", 1);
@@ -265,6 +269,21 @@ function setWhiteboard(sessionId) {
 
 function addOnlineUser(username) {
   $("#users").append('<li id="' + username + '">' + username + '</li>');
+}
+
+
+function setShareButtonBehaviour(sessionId) {
+  var dialog = document.getElementById('share-dialog');
+  document.getElementById("sessionId").disabled = true;
+  $('#sessionId').val(sessionId);
+
+  $("#shareButton").click(function() {
+    dialog.showModal();
+  });
+
+  $("#share-close").click(function() {
+    dialog.close();
+  });
 }
 
 

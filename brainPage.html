@@ -41,8 +41,7 @@
 
         <!-- Bottom -->
         <div id="bottom">
-            <div id="shareLinkText"><b>Share with colaborators</b></div>
-            <a id="shareLink" href=""><b>Link to share</b></a>
+            <button id="shareButton"><b>Share with colaborators</b></button>
         </div>
 
         <!-- Chat -->
@@ -58,10 +57,17 @@
             </div>
         </div>
 
-        <!-- New game dialog -->
+        <!-- Name dialog -->
         <dialog id="name-dialog">
             <h3>Enter your name here (at least 4 characters)</h3>
             <input type='text' maxlength="10" id='name' placeholder='Type your name here...'/>
+        </dialog>
+
+        <!-- Share dialog -->
+        <dialog id="share-dialog">
+            <h3>Send this session id to your collabators</h3>
+            <input type='text' id='sessionId'/>
+            <button id="share-close"><b>Close</b></button>
         </dialog>
 
         <!-- Controller -->
