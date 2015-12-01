@@ -77,19 +77,21 @@ body {
 
 #whiteboard {
 
-	z-index: 0;
+	z-index: 2;
 }
 
 #canvas {
 
 	height: 95%;
 	width: 100%;
+    z-index: 2;
 }
 
 #colorPicker {
 
 	height: 5%;
 	width: 100%;
+    z-index: 2;
 }
 
 #bottom {

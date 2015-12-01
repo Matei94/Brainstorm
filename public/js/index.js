@@ -59,6 +59,7 @@ function onSessionId(sessionId) {
   setOnlineUsers(sessionId);
   setTextEditor(sessionId);
   showWhiteboard();
+  draw();
   setChat(sessionId);
 }
 function setOnlineUsers(sessionId) {
@@ -81,13 +82,24 @@ function setOnlineUsers(sessionId) {
   userRef.onDisconnect().remove();
 }
 function setTextEditor(sessionId) {
-  $("#tab1").click(function() {
-    var firepadRef = new Firebase('https://matei.firebaseio-demo.com/'+ sessionId + "/text");
-    var codeMirror = CodeMirror(document.getElementById('feature'),
-      { lineWrapping: true });
-    var firepad = Firepad.fromCodeMirror(firepadRef, codeMirror,
-      { richTextToolbar: true, richTextShortcuts: true });
-  });
+    
+        $("#tab1").click(function() {
+            if (textEditorReady == false) {
+                textEditorReady = true;
+                var firepadRef = new Firebase('https://matei.firebaseio-demo.com/'+ sessionId + "/text");
+                var codeMirror = CodeMirror(document.getElementById('feature'),
+                { lineWrapping: true });
+                var firepad = Firepad.fromCodeMirror(firepadRef, codeMirror,
+                { richTextToolbar: true, richTextShortcuts: true });
+            }    
+            $("#whiteboard").css("z-index", 0);
+            $("#canvas").css("z-index", 0);
+            $("#colorPicker").css("z-index", 0);
+            $("#feature").css("z-index", 10);
+            
+            
+            $("#canvas").css("opacity", 0.0);
+        });
 }
 function setChat(sessionId) {
   var messagesRef = new Firebase('https://matei.firebaseio.com/' + sessionId + "/chat");
@@ -138,7 +150,7 @@ function draw() {
     var pixelDataRef = new Firebase('https://iqlda6d7y3d.firebaseio-demo.com/');
 
     // Set up our canvas
-    var myCanvas = document.getElementById('');
+    var myCanvas = document.getElementById('canvas');
     var myContext = myCanvas.getContext ? myCanvas.getContext('2d') : null;
     if (myContext == null) {
       alert("You must use a browser that supports HTML5 Canvas to run this demo.");
@@ -216,9 +228,11 @@ function draw() {
 
 function showWhiteboard() {
     $("#tab2").click(function() {
-        console.print("pula");
-        $("#whiteboard").css("z-index", 1);
+        $("#whiteboard").css("z-index", 10);
+         $("#canvas").css("z-index", 11);
+          $("#colorPicker").css("z-index", 11);
         $("#feature").css("z-index", 0);
+        console.log($("#feature").css("z-index"));
     });
 }
 /*****************************************************************************/
