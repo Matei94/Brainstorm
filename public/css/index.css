@@ -99,7 +99,7 @@
 }
 
 .example-chat ul .example-chat-username {
-  margin-right: 10px;
+        float: left;
 }
 
 .example-chat footer {
