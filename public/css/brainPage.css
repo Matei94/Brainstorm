@@ -54,6 +54,7 @@ body {
 	font-size: 2vw;
     border: 0.1vw solid #000;
 	float: left;
+    background-color: #ff5759
 }
 
 #textOnline {
@@ -69,6 +70,9 @@ body {
 	overflow: auto;
 	font-size: 2vw;
 	width: 100%;
+    text-align: left;
+    padding-left: 5%;
+    margin: 0;
 }
 
 #container {
@@ -106,15 +110,27 @@ body {
 
 #canvas {
   opacity: 0.0;
-	height: 95%;
-	width: 100%;
+<<<<<<< HEAD
+  /*height: 95%;
+  width: 100%;*/
+=======
+  height: 95%;
+  width: 100%; 
+>>>>>>> 9c2d9d3486ccc02fad23e004abdb7b3e4e1c5829
   z-index: 0;
 }
 
+.colorbox {
+  width: 22px;
+  height: 22px;
+  margin: 1px;
+  display: inline-block;
+  border: 3px solid black; }
+
 #colorPicker {
   opacity: 0.0;
-	height: 5%;
-	width: 100%;
+  height: 5%;
+  width: 100%;
   z-index: 0;
 }
 
@@ -127,4 +143,9 @@ body {
 #shareButton {
 	margin-right: 70%;
 	font-size: 2vw;
+    background-color: #1ef5ee
+}
+
+#shareButton:hover {
+    background-color: #1ea6f5
 }

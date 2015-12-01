@@ -9,6 +9,8 @@ var gUsername;
 /*** DOCUMENT READY **********************************************************/
 
 $(document).ready(function() {
+  
+    
   var sessionId = window.location.pathname.substring(1);
   if (sessionId.length > 0 && sessionId != 'start') {
     onSessionId(sessionId);
