@@ -24,15 +24,7 @@ $(document).ready(function() {
 /*** FUNCTIONS ***************************************************************/
 
 function onSessionId(sessionId) {
-  /* Set share link */
-  var pathname = window.location.pathname;
-  if (pathname == '/') {
-    $('#shareLink').attr("href", window.location.href + sessionId);
-    $('#shareLink').text(window.location.href + sessionId);
-  } else {
-    $('#shareLink').attr("href", window.location.href);
-    $('#shareLink').text(window.location.href);
-  }
+  collapseChat();
 
   /* Set username */
   var dialog = document.getElementById('name-dialog');
@@ -50,10 +42,10 @@ function onSessionId(sessionId) {
         setChat(sessionId);
         setWhiteboard(sessionId);
         setCodeEditor(sessionId);
+        setShareButtonBehaviour(sessionId);
       }
     }
   });
-  collapseChat();
 }
 
 
@@ -265,6 +257,21 @@ function setWhiteboard(sessionId) {
 
 function addOnlineUser(username) {
   $("#users").append('<li id="' + username + '">' + username + '</li>');
+}
+
+
+function setShareButtonBehaviour(sessionId) {
+  var dialog = document.getElementById('share-dialog');
+  document.getElementById("sessionId").disabled = true;
+  $('#sessionId').val(sessionId);
+
+  $("#shareButton").click(function() {
+    dialog.showModal();
+  });
+
+  $("#share-close").click(function() {
+    dialog.close();
+  });
 }
 
 
