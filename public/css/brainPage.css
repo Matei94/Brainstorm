@@ -54,6 +54,7 @@ body {
 	font-size: 2vw;
     border: 0.1vw solid #000;
 	float: left;
+    background-color: #ff5759
 }
 
 #textOnline {
@@ -69,6 +70,9 @@ body {
 	overflow: auto;
 	font-size: 2vw;
 	width: 100%;
+    text-align: left;
+    padding-left: 5%;
+    margin: 0;
 }
 
 #container {
@@ -127,4 +131,9 @@ body {
 #shareButton {
 	margin-right: 70%;
 	font-size: 2vw;
+    background-color: #1ef5ee
+}
+
+#shareButton:hover {
+    background-color: #1ea6f5
 }
