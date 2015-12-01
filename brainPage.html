@@ -9,7 +9,7 @@
         <!-- CSS -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.2.0/codemirror.css"/>
         <link rel="stylesheet" type="text/css" href="css/firepad.css"/>
-        
+
         <link rel="stylesheet" type="text/css" href="css/index.css"/>
         <link rel="stylesheet" type="text/css" href="css/drawing.css"/>
         <link rel="stylesheet" type="text/css" href="css/brainPage.css"/>
@@ -56,7 +56,13 @@
                 </footer>
             </div>
         </div>
-        
+
+        <!-- New game dialog -->
+        <dialog id="name-dialog">
+            <h3>Enter your name here (at least 4 characters)</h3>
+            <input type='text' maxlength="10" id='name' placeholder='Type your name here...'/>
+        </dialog>
+
         <!-- Controller -->
         <script src='js/index.js'></script>
     </body>
