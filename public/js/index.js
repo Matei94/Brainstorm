@@ -2,6 +2,7 @@
 
 var gUsername;
 var gChatCollapsed = false;
+var gNumConnectedUsers = 0;
 
 /*****************************************************************************/
 
@@ -44,7 +45,18 @@ function onSessionId(sessionId) {
         setWhiteboard(sessionId);
         setCodeEditor(sessionId);
         setShareButtonBehaviour(sessionId);
+        setOnCloseBehaviour(sessionId);
       }
+    }
+  });
+}
+
+
+function setOnCloseBehaviour(sessionId) {
+  $(window).on('beforeunload', function() {
+    if (gNumConnectedUsers == 1) {
+      var sessionRef = new Firebase('https://matei.firebaseio.com/' + sessionId);
+      sessionRef.remove(function(err) {});
     }
   });
 }
@@ -53,6 +65,8 @@ function onSessionId(sessionId) {
 function setOnlineUsers(sessionId) {
   var onlineUsersRef = new Firebase('https://matei.firebaseio.com/' + sessionId + "/users");
   onlineUsersRef.on('child_added', function (snapshot) {
+    gNumConnectedUsers += 1;
+
     var data = snapshot.val();
     var username = data.username || "anonymous";
 
@@ -60,6 +74,8 @@ function setOnlineUsers(sessionId) {
   });
 
   onlineUsersRef.on('child_removed', function (snapshot) {
+    gNumConnectedUsers -= 1;
+
     var data = snapshot.val();
     var username = data.username || "anonymous";
 
