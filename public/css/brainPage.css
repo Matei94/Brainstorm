@@ -21,6 +21,7 @@ body {
 	width: 33.3%;
 	font-size: 2vw;
 	float: left;
+    background-color: #1ea6f5
 }
 
 #tab2 {
@@ -29,6 +30,7 @@ body {
 	width: 33.3%;
 	font-size: 2vw;
 	float: left;
+    background-color: #1ef5ee
 }
 
 #tab3 {
@@ -37,6 +39,7 @@ body {
 	width: 33.3%;
 	font-size: 2vw;
 	float: left;
+    background-color: #1ef5ee
 }
 
 #center {
