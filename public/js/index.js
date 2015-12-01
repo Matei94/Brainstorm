@@ -175,7 +175,7 @@ function setChat(sessionId) {
     //CREATE ELEMENTS MESSAGE & SANITIZE TEXT
     var messageElement = $("<li>");
     var nameElement = $("<strong class='example-chat-username'></strong>")
-    nameElement.text(username);
+    nameElement.text(username + ": ");
     messageElement.text(message).prepend(nameElement);
 
     //ADD MESSAGE
