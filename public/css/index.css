@@ -87,19 +87,24 @@
   padding: 20px;
   height: 200px;
   overflow: auto;
+  text-align: left;
 }
 
-.example-chat ul li {
+/*.example-chat ul li {
   margin-bottom: 10px;
   line-height: 24px;
 }
 
 .example-chat ul li:last-child {
-  margin: 0px;
-}
+    text-align:left;
+    margin: 0;
+    padding: 0;
+}*/
 
-.example-chat ul .example-chat-username {
-        float: left;
+.example-chat-username {
+    text-align:left;
+    margin: 0;
+    padding: 0;
 }
 
 .example-chat footer {
