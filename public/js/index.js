@@ -99,8 +99,9 @@ function setTextEditor(sessionId) {
             $("#colorPicker").css("z-index", 0);
             $("#feature").css("z-index", 10);
             
-            
             $("#canvas").css("opacity", 0.0);
+            $("#colorPicker").css("opacity", 0.0);
+            $("#feature").css("opacity", 1.0);
         });
 }
 function setChat(sessionId) {
@@ -231,10 +232,13 @@ function draw() {
 function showWhiteboard() {
     $("#tab2").click(function() {
         $("#whiteboard").css("z-index", 10);
-         $("#canvas").css("z-index", 11);
-          $("#colorPicker").css("z-index", 11);
+        $("#canvas").css("z-index", 11);
+        $("#colorPicker").css("z-index", 11);
         $("#feature").css("z-index", 0);
-        console.log($("#feature").css("z-index"));
+        
+        $("#canvas").css("opacity", 1.0);
+        $("#colorPicker").css("opacity", 1.0);
+        $("#feature").css("opacity", 0.0);
     });
 }
 /*****************************************************************************/
