@@ -78,10 +78,11 @@ function setTextEditor(sessionId) {
   { richTextToolbar: true, richTextShortcuts: true });
 
   $("#tab1").click(function() {
+    $(".CodeMirror").height($("#container").height() - 100);
     $("#tab1").css("backgroundColor", "#1ea6f5");
     $("#tab2").css("backgroundColor", "#1ef5ee");
     $("#tab3").css("backgroundColor", "#1ef5ee");
-      
+
     $("#whiteboard").css("z-index", 0);
     $("#canvas").css("z-index", 0);
     $("#colorPicker").css("z-index", 0);
@@ -105,10 +106,11 @@ function setCodeEditor(sessionId) {
   { defaultText: '// Write your JavaScript code here'});
 
   $("#tab3").click(function() {
+    $(".CodeMirror").height($("#container").height());
     $("#tab1").css("backgroundColor", "#1ef5ee");
     $("#tab2").css("backgroundColor", "#1ef5ee");
     $("#tab3").css("backgroundColor", "#1ea6f5");
-      
+
     $("#whiteboard").css("z-index", 0);
     $("#canvas").css("z-index", 0);
     $("#colorPicker").css("z-index", 0);
@@ -251,7 +253,7 @@ function setWhiteboard(sessionId) {
     $("#tab1").css("backgroundColor", "#1ef5ee");
     $("#tab2").css("backgroundColor", "#1ea6f5");
     $("#tab3").css("backgroundColor", "#1ef5ee");
-      
+
     $("#whiteboard").css("z-index", 1);
     $("#canvas").css("z-index", 1);
     $("#colorPicker").css("z-index", 1);

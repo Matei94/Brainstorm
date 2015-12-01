@@ -11,7 +11,7 @@
 
 .firepad .CodeMirror {
   position: relative;
-  height: 85%;
+  height: 80%;
 }
 
 .firepad-with-toolbar .CodeMirror {
@@ -20,6 +20,7 @@
 
 .firepad-with-toolbar .CodeMirror-lines {
   padding-top: 10px;
+  height: 100%;
 }
 
 .firepad-toolbar {
