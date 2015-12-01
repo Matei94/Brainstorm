@@ -10,7 +10,7 @@ var gUsername;
 
 $(document).ready(function() {
   var sessionId = window.location.pathname.substring(1);
-  if (sessionId.length > 0) {
+  if (sessionId.length > 0 && sessionId != 'start') {
     onSessionId(sessionId);
   } else {
     $.get("/session", onSessionId);

@@ -27,12 +27,17 @@ app.set('port', (process.env.PORT || 5000));
 
 /* Main page */
 app.get('/', function(req, res) {
-  res.sendFile(__dirname + "/" + "brainPage.html" );
+  res.sendFile(__dirname + "/" + "firstPage.html");
 });
 
 app.get('/:id', function(req, res) {
+  /* New session */
+  if (req.params.id == "start") {
+    res.sendFile(__dirname + "/" + "brainPage.html");
+  }
+
   /* Get new session */
-  if (req.params.id == "session") {
+  else if (req.params.id == "session") {
     var sessionId = randomstring.generate({
       length: 12,
       charset: 'alphabetic'
