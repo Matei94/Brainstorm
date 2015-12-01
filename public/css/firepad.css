@@ -11,6 +11,7 @@
 
 .firepad .CodeMirror {
   position: relative;
+  height: 85%;
 }
 
 .firepad-with-toolbar .CodeMirror {
@@ -330,4 +331,4 @@ sDAAgD+AICAAcBAIEAgQCBAIEABQMBgAAAABgAAAAACAAHAAAMABwALAA8AEwAWAAARIRUhFyEVIRUhF
 }
 .firepad-tb-bubble:before {
   content: "\e00f";
-} 
+}

@@ -25,18 +25,6 @@ $(document).ready(function() {
 
 /*** FUNCTIONS ***************************************************************/
 
-function addOnlineUser(username) {
-  $("#users").append('<li id="' + username + '">' + username + '</li>');
-}
-
-
-function collapseChat() {
-  $(".chat-header").click(function() {
-    $(".chat-content").slideToggle(500);
-  });
-}
-
-
 function onSessionId(sessionId) {
   /* Set share link */
   var pathname = window.location.pathname;
@@ -93,25 +81,23 @@ function setOnlineUsers(sessionId) {
 
 
 function setTextEditor(sessionId) {
+  var firepadRef = new Firebase('https://matei.firebaseio-demo.com/'+ sessionId + "/text");
+  var codeMirror = CodeMirror(document.getElementById('feature'),
+  { lineWrapping: true });
+  var firepad = Firepad.fromCodeMirror(firepadRef, codeMirror,
+  { richTextToolbar: true, richTextShortcuts: true });
 
-        $("#tab1").click(function() {
-            if (textEditorReady == false) {
-                textEditorReady = true;
-                var firepadRef = new Firebase('https://matei.firebaseio-demo.com/'+ sessionId + "/text");
-                var codeMirror = CodeMirror(document.getElementById('feature'),
-                { lineWrapping: true });
-                var firepad = Firepad.fromCodeMirror(firepadRef, codeMirror,
-                { richTextToolbar: true, richTextShortcuts: true });
-            }
-            $("#whiteboard").css("z-index", 0);
-            $("#canvas").css("z-index", 0);
-            $("#colorPicker").css("z-index", 0);
-            $("#feature").css("z-index", 10);
+  $("#tab1").click(function() {
+    $("#whiteboard").css("z-index", 0);
+    $("#canvas").css("z-index", 0);
+    $("#colorPicker").css("z-index", 0);
 
-            $("#canvas").css("opacity", 0.0);
-            $("#colorPicker").css("opacity", 0.0);
-            $("#feature").css("opacity", 1.0);
-        });
+    $("#feature").css("z-index", 1);
+
+    $("#canvas").css("opacity", 0.0);
+    $("#colorPicker").css("opacity", 0.0);
+    $("#feature").css("opacity", 1.0);
+  });
 }
 
 
@@ -135,7 +121,7 @@ function setChat(sessionId) {
   });
 
   // Add a callback that is triggered for each chat message.
-  messagesRef.limitToLast(10).on('child_added', function (snapshot) {
+  messagesRef.on('child_added', function (snapshot) {
     //GET DATA
     var data = snapshot.val();
     var username = data.name || "anonymous";
@@ -157,98 +143,112 @@ function setChat(sessionId) {
 
 
 function setWhiteboard(sessionId) {
-    //Set up some globals
-    var pixSize = 8, lastPoint = null, currentColor = "000", mouseDown = 0;
+  //Set up some globals
+  var pixSize = 8, lastPoint = null, currentColor = "000", mouseDown = 0;
 
-    //Create a reference to the pixel data for our drawing.
-    var pixelDataRef = new Firebase('https://matei.firebaseio.com/' + sessionId + "/draw");
+  //Create a reference to the pixel data for our drawing.
+  var pixelDataRef = new Firebase('https://matei.firebaseio.com/' + sessionId + "/draw");
 
-    // Set up our canvas
-    var myCanvas = document.getElementById('canvas');
-    var myContext = myCanvas.getContext ? myCanvas.getContext('2d') : null;
-    if (myContext == null) {
-      alert("You must use a browser that supports HTML5 Canvas to run this demo.");
-      return;
-    }
+  // Set up our canvas
+  var myCanvas = document.getElementById('canvas');
+  var myContext = myCanvas.getContext ? myCanvas.getContext('2d') : null;
+  if (myContext == null) {
+    alert("You must use a browser that supports HTML5 Canvas to run this demo.");
+    return;
+  }
 
-    //Setup each color palette & add it to the screen
-    var colors = ["fff","000","f00","0f0","00f","88f","f8d","f88","f05","f80","0f8","cf0","08f","408","ff8","8ff"];
-    for (c in colors) {
-      var item = $('<div/>').css("background-color", '#' + colors[c]).addClass("colorbox");
-      item.click((function () {
-        var col = colors[c];
-        return function () {
-          currentColor = col;
-        };
-      })());
-      item.appendTo('#colorPicker');
-    }
+  //Setup each color palette & add it to the screen
+  var colors = ["fff","000","f00","0f0","00f","88f","f8d","f88","f05","f80","0f8","cf0","08f","408","ff8","8ff"];
+  for (c in colors) {
+    var item = $('<div/>').css("background-color", '#' + colors[c]).addClass("colorbox");
+    item.click((function () {
+      var col = colors[c];
+      return function () {
+        currentColor = col;
+      };
+    })());
+    item.appendTo('#colorPicker');
+  }
 
-    //Keep track of if the mouse is up or down
-    myCanvas.onmousedown = function () {mouseDown = 1;};
-    myCanvas.onmouseout = myCanvas.onmouseup = function () {
-      mouseDown = 0; lastPoint = null;
-    };
+  //Keep track of if the mouse is up or down
+  myCanvas.onmousedown = function () {mouseDown = 1;};
+  myCanvas.onmouseout = myCanvas.onmouseup = function () {
+    mouseDown = 0; lastPoint = null;
+  };
 
-    //Draw a line from the mouse's last position to its current position
-    var drawLineOnMouseMove = function(e) {
-      if (!mouseDown) return;
+  //Draw a line from the mouse's last position to its current position
+  var drawLineOnMouseMove = function(e) {
+    if (!mouseDown) return;
 
-      e.preventDefault();
+    e.preventDefault();
 
-      // Bresenham's line algorithm. We use this to ensure smooth lines are drawn
-      var offset = $('canvas').offset();
-      var x1 = Math.floor((e.pageX - offset.left) / pixSize - 1),
-        y1 = Math.floor((e.pageY - offset.top) / pixSize - 1);
-      var x0 = (lastPoint == null) ? x1 : lastPoint[0];
-      var y0 = (lastPoint == null) ? y1 : lastPoint[1];
-      var dx = Math.abs(x1 - x0), dy = Math.abs(y1 - y0);
-      var sx = (x0 < x1) ? 1 : -1, sy = (y0 < y1) ? 1 : -1, err = dx - dy;
-      while (true) {
-        //write the pixel into Firebase, or if we are drawing white, remove the pixel
-        pixelDataRef.child(x0 + ":" + y0).set(currentColor === "fff" ? null : currentColor);
+    // Bresenham's line algorithm. We use this to ensure smooth lines are drawn
+    var offset = $('canvas').offset();
+    var x1 = Math.floor((e.pageX - offset.left) / pixSize - 1),
+      y1 = Math.floor((e.pageY - offset.top) / pixSize - 1);
+    var x0 = (lastPoint == null) ? x1 : lastPoint[0];
+    var y0 = (lastPoint == null) ? y1 : lastPoint[1];
+    var dx = Math.abs(x1 - x0), dy = Math.abs(y1 - y0);
+    var sx = (x0 < x1) ? 1 : -1, sy = (y0 < y1) ? 1 : -1, err = dx - dy;
+    while (true) {
+      //write the pixel into Firebase, or if we are drawing white, remove the pixel
+      pixelDataRef.child(x0 + ":" + y0).set(currentColor === "fff" ? null : currentColor);
 
-        if (x0 == x1 && y0 == y1) break;
-        var e2 = 2 * err;
-        if (e2 > -dy) {
-          err = err - dy;
-          x0 = x0 + sx;
-        }
-        if (e2 < dx) {
-          err = err + dx;
-          y0 = y0 + sy;
-        }
+      if (x0 == x1 && y0 == y1) break;
+      var e2 = 2 * err;
+      if (e2 > -dy) {
+        err = err - dy;
+        x0 = x0 + sx;
       }
-      lastPoint = [x1, y1];
-    };
-    $(myCanvas).mousemove(drawLineOnMouseMove);
-    $(myCanvas).mousedown(drawLineOnMouseMove);
+      if (e2 < dx) {
+        err = err + dx;
+        y0 = y0 + sy;
+      }
+    }
+    lastPoint = [x1, y1];
+  };
+  $(myCanvas).mousemove(drawLineOnMouseMove);
+  $(myCanvas).mousedown(drawLineOnMouseMove);
 
-    // Add callbacks that are fired any time the pixel data changes and adjusts the canvas appropriately.
-    // Note that child_added events will be fired for initial pixel data as well.
-    var drawPixel = function(snapshot) {
-      var coords = snapshot.key().split(":");
-      myContext.fillStyle = "#" + snapshot.val();
-      myContext.fillRect(parseInt(coords[0]) * pixSize, parseInt(coords[1]) * pixSize, pixSize, pixSize);
-    };
-    var clearPixel = function(snapshot) {
-      var coords = snapshot.key().split(":");
-      myContext.clearRect(parseInt(coords[0]) * pixSize, parseInt(coords[1]) * pixSize, pixSize, pixSize);
-    };
-    pixelDataRef.on('child_added', drawPixel);
-    pixelDataRef.on('child_changed', drawPixel);
-    pixelDataRef.on('child_removed', clearPixel);
+  // Add callbacks that are fired any time the pixel data changes and adjusts the canvas appropriately.
+  // Note that child_added events will be fired for initial pixel data as well.
+  var drawPixel = function(snapshot) {
+    var coords = snapshot.key().split(":");
+    myContext.fillStyle = "#" + snapshot.val();
+    myContext.fillRect(parseInt(coords[0]) * pixSize, parseInt(coords[1]) * pixSize, pixSize, pixSize);
+  };
+  var clearPixel = function(snapshot) {
+    var coords = snapshot.key().split(":");
+    myContext.clearRect(parseInt(coords[0]) * pixSize, parseInt(coords[1]) * pixSize, pixSize, pixSize);
+  };
+  pixelDataRef.on('child_added', drawPixel);
+  pixelDataRef.on('child_changed', drawPixel);
+  pixelDataRef.on('child_removed', clearPixel);
 
-    $("#tab2").click(function() {
-        $("#whiteboard").css("z-index", 10);
-        $("#canvas").css("z-index", 11);
-        $("#colorPicker").css("z-index", 11);
-        $("#feature").css("z-index", 0);
+  $("#tab2").click(function() {
+    $("#whiteboard").css("z-index", 1);
+    $("#canvas").css("z-index", 1);
+    $("#colorPicker").css("z-index", 1);
 
-        $("#canvas").css("opacity", 1.0);
-        $("#colorPicker").css("opacity", 1.0);
-        $("#feature").css("opacity", 0.0);
-    });
+    $("#feature").css("z-index", 0);
+
+    $("#canvas").css("opacity", 1.0);
+    $("#colorPicker").css("opacity", 1.0);
+
+    $("#feature").css("opacity", 0.0);
+  });
+}
+
+
+function addOnlineUser(username) {
+  $("#users").append('<li id="' + username + '">' + username + '</li>');
+}
+
+
+function collapseChat() {
+  $(".chat-header").click(function() {
+    $(".chat-content").slideToggle(500);
+  });
 }
 
 /*****************************************************************************/

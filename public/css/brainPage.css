@@ -39,7 +39,6 @@ body {
 }
 
 #center {
-
 	height: 85%;
 	width: 100%;
 }
@@ -86,27 +85,26 @@ body {
 }
 
 #feature {
-
 	z-index: 1;
 }
 
 #whiteboard {
 
-	z-index: 2;
+	z-index: 0;
 }
 
 #canvas {
 
 	height: 95%;
 	width: 100%;
-    z-index: 2;
+  z-index: 0;
 }
 
 #colorPicker {
 
 	height: 5%;
 	width: 100%;
-    z-index: 2;
+  z-index: 0;
 }
 
 #bottom {
