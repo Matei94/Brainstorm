@@ -96,9 +96,9 @@ function setTextEditor(sessionId) {
 
   $("#tab1").click(function() {
     $(".CodeMirror").height($("#container").height() - 100);
-    $("#tab1").css("backgroundColor", "#ff9933");
-    $("#tab2").css("backgroundColor", "gray");
-    $("#tab3").css("backgroundColor", "gray");
+    $("#tab1").css("backgroundColor", "#0162FB");
+    $("#tab2").css("backgroundColor", "#3C87FF");
+    $("#tab3").css("backgroundColor", "#3C87FF");
 
     $("#whiteboard").css("z-index", 0);
     $("#canvas").css("z-index", 0);
@@ -124,9 +124,9 @@ function setCodeEditor(sessionId) {
 
   $("#tab3").click(function() {
     $(".CodeMirror").height($("#container").height());
-    $("#tab1").css("backgroundColor", "gray");
-    $("#tab2").css("backgroundColor", "gray");
-    $("#tab3").css("backgroundColor", "#ff9933");
+    $("#tab1").css("backgroundColor", "#3C87FF");
+    $("#tab2").css("backgroundColor", "#3C87FF");
+    $("#tab3").css("backgroundColor", "#0162FB");
 
     $("#whiteboard").css("z-index", 0);
     $("#canvas").css("z-index", 0);
@@ -271,9 +271,9 @@ function setWhiteboard(sessionId) {
   pixelDataRef.on('child_removed', clearPixel);
 
   $("#tab2").click(function() {
-    $("#tab1").css("backgroundColor", "gray");
-    $("#tab2").css("backgroundColor", "#ff9933");
-    $("#tab3").css("backgroundColor", "gray");
+    $("#tab1").css("backgroundColor", "#3C87FF");
+    $("#tab2").css("backgroundColor", "#0162FB");
+    $("#tab3").css("backgroundColor", "#3C87FF");
 
     $("#whiteboard").css("z-index", 1);
     $("#canvas").css("z-index", 1);

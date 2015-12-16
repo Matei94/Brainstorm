@@ -21,8 +21,9 @@ body {
 	font-family: "Helvetica Neue Light";
 	width: 33.3%;
 	font-size: 2vw;
+  color: #fff;
 	float: left;
-    background-color: #ff9933;
+  background-color: #0162FB;
 }
 
 #tab2 {
@@ -31,8 +32,9 @@ body {
 	font-family: "Helvetica Neue Light";
 	width: 33.3%;
 	font-size: 2vw;
+  color: #fff;
 	float: left;
-    background-color: gray;
+  background-color: #3C87FF;
 }
 
 #tab3 {
@@ -41,8 +43,9 @@ body {
 	font-family: "Helvetica Neue Light";
 	width: 33.3%;
 	font-size: 2vw;
+  color: #fff;
 	float: left;
-    background-color: gray;
+  background-color: #3C87FF;
 }
 
 #center {
@@ -57,7 +60,7 @@ body {
 	font-size: 2vw;
     border: 0.1vw solid #000;
 	float: left;
-    background-color: gray;
+    background-color: #90BBFE;
     border-radius: 10px;
 }
 
@@ -145,11 +148,11 @@ body {
 #shareButton {
     width: 14.8%;
 	  font-family: "Helvetica Neue Light";
-    font-size: 2vw;
+    font-size: 1.5vw;
     border: 0.1vw solid #000;
     float: left;
-    margin-top: 0.2%;
-    background-color: #1ef5ee;
+    margin-top: 0.5%;
+    background-color: #ff3300;
     border-radius: 25px;
 }
 
