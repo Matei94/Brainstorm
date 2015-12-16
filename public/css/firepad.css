@@ -268,34 +268,34 @@ sDAAgD+AICAAcBAIEAgQCBAIEABQMBgAAAABgAAAAACAAHAAAMABwALAA8AEwAWAAARIRUhFyEVIRUhF
   -webkit-font-smoothing: antialiased;
 }
 .firepad-tb-bold:before {
- content: url(../res/text-bold.png);
+ content: url(../res/bold.png);
 }
 .firepad-tb-italic:before {
-  content: url(../res/text-italic.png);
+  content: url(../res/italic.png);
 }
 .firepad-tb-underline:before {
-  content: url(../res/text-underline.png);
+  content: url(../res/underline.png);
 }
 .firepad-tb-strikethrough:before {
-  content: url(../res/text-strike.png);
+  content: url(../res/strike.png);
 }
 .firepad-tb-list:before {
-  content: "\e004";
+  content: url(../res/list-3.png);
 }
 .firepad-tb-list-2:before {
-  content: "\e005";
+  content: url(../res/list.png);
 }
 .firepad-tb-numbered-list:before {
-  content: "\e006";
+  content: url(../res/list-2.png);
 }
 .firepad-tb-paragraph-left:before {
-  content: "\e007";
+  content: url(../res/alignleft.png);
 }
 .firepad-tb-paragraph-center:before {
-  content: "\e008";
+  content: url(../res/aligncenter.png);
 }
 .firepad-tb-paragraph-right:before {
-  content: "\e009";
+  content: url(../res/alignright.png);
 }
 .firepad-tb-paragraph-justify:before {
   content: "\e00a";
@@ -307,10 +307,10 @@ sDAAgD+AICAAcBAIEAgQCBAIEABQMBgAAAABgAAAAACAAHAAAMABwALAA8AEwAWAAARIRUhFyEVIRUhF
   content: "\e00c";
 }
 .firepad-tb-undo:before {
-  content: "\e00d";
+  content: url(../res/undo.png);
 }
 .firepad-tb-redo:before {
-  content: "\e00e";
+  content: url(../res/redo.png);
 }
 .firepad-tb-box-add:before {
   content: "\e010";
@@ -322,13 +322,13 @@ sDAAgD+AICAAcBAIEAgQCBAIEABQMBgAAAABgAAAAACAAHAAAMABwALAA8AEwAWAAARIRUhFyEVIRUhF
   content: "\e012";
 }
 .firepad-tb-indent-decrease:before {
-  content: "\e013";
+  content: url(../res/indentdecrease.png);
 }
 .firepad-tb-indent-increase:before {
-  content: "\e014";
+  content: url(../res/indentincrease.png);
 }
 .firepad-tb-insert-image:before {
-  content: "\e015";
+  content: url(../res/insertimage.png);
 }
 .firepad-tb-bubble:before {
   content: "\e00f";
