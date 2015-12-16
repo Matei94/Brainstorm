@@ -7,6 +7,9 @@ body {
     margin-left:auto;
     margin-right:auto;
     background-image: url("../res/firstpagebackground2.jpg");
+    background-size: cover;
+    min-width: 100%;
+    min-height: 100%;
 }
 
 #top {
@@ -29,53 +32,52 @@ body {
     overflow: hidden;
 
     font-size: 2vw;
-    margin-top: 3%;
+    margin-top: 2%;
     margin-right: 60%;
     height: 20%;
     width: 20%;
     border: 0.2vw solid #000;
 }
 
-#bottomLeft {
-
-    width: 50%;
-    height: 30%;
-    vertical-align: center;
-    text-align: center;
-    margin-left:auto;
-    margin-right:auto;
-    float: left;
-}
-
-#bottomRight {
-
-    width: 50%;
-    height: 30%;
-    vertical-align: center;
-    text-align: center;
-    margin-left:auto;
-    margin-right:auto;
-    float: left;
+#brainstorming {
+    margin-right: 60%;
+    font-size: 5vw;
 }
 
 #joinText {
 
     font-size: 1.5vw;
     color: #000;
+    margin: 0 auto;
+    width: 20%;
+    text-align: left;
 }
 
 #linkSession {
 
     font-size: 2vw;
     border: 0.2vw solid #000;
+    width: 20%;
+    text-align: center;
+    margin-left: 3%;
+    
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    cursor:pointer;
+    overflow: hidden;
 }
 
 #JoinButton {
 
-    width: 20%;
-    height: 30%;
+    width: 5%;
+    height: 7%;
     font-size: 2vw;
-    background-color: #cc0000;
-    border: 0.2vw solid #000;
+    text-align: left;
+    
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
 }
 
