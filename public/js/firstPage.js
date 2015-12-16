@@ -7,7 +7,7 @@ $(document).ready(function() {
 
   $("#joinButton").click(function() {
     var sessionId = $('#linkSession').val();
-    if (sessionId.length == 12) {
+    if (sessionId.length == 4) {
       window.location.href = window.location.href + sessionId;
     } else {
       alert("Invalid session");

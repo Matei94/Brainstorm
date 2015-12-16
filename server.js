@@ -38,12 +38,7 @@ app.get('/:id', function(req, res) {
 
   /* Get new session */
   else if (req.params.id == "session") {
-    var sessionId = randomstring.generate({
-      length: 12,
-      charset: 'alphabetic'
-    });
-
-    console.log("New session: " + sessionId);
+    var sessionId = Math.floor(Math.random() * 10000).toString();
 
     sessions.push(sessionId);
     res.send(sessionId);
